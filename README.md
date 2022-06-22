@@ -10,3 +10,6 @@
 - stop
   - https://www.svgrepo.com/svg/55610/stop
   - https://creativecommons.org/share-your-work/public-domain/cc0/
+- circle
+  - https://www.svgrepo.com/svg/343765/circle
+  - https://creativecommons.org/share-your-work/public-domain/cc0/
