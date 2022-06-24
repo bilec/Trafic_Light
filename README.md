@@ -13,3 +13,6 @@
 - circle
   - https://www.svgrepo.com/svg/343765/circle
   - https://creativecommons.org/share-your-work/public-domain/cc0/
+- all vectors
+  - this also helped me
+  - https://www.viralandroid.com/2016/01/circular-button-with-icon-and-text-in-android.html
