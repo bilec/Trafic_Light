@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
                             delay(5.toDuration(DurationUnit.SECONDS))
 
                             withContext(Dispatchers.Main) { binding.orangeLight.setColorFilter(resources.getColor(R.color.orange, applicationContext.theme)) }
-                            delay(3.toDuration(DurationUnit.SECONDS))
+                            delay(2.toDuration(DurationUnit.SECONDS))
 
                             withContext(Dispatchers.Main) {
                                 binding.redLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
