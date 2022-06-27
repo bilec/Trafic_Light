@@ -58,46 +58,12 @@ class MainActivity : AppCompatActivity() {
                 TrafficLightMode.DAY_MODE -> {
                     viewModel.cancelJob()
                     turnOffLight()
-
-                    viewModel.currentJob = GlobalScope.launch(Dispatchers.IO) {
-                        while (true) {
-                            withContext(Dispatchers.Main) {
-                                binding.redLight.setColorFilter(resources.getColor(R.color.red, applicationContext.theme))
-                                binding.orangeLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
-                            }
-                            delay(5.toDuration(DurationUnit.SECONDS))
-
-                            withContext(Dispatchers.Main) { binding.orangeLight.setColorFilter(resources.getColor(R.color.orange, applicationContext.theme)) }
-                            delay(2.toDuration(DurationUnit.SECONDS))
-
-                            withContext(Dispatchers.Main) {
-                                binding.redLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
-                                binding.orangeLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
-                                binding.greenLight.setColorFilter(resources.getColor(R.color.green, applicationContext.theme))
-                            }
-                            delay(5.toDuration(DurationUnit.SECONDS))
-
-                            withContext(Dispatchers.Main) {
-                                binding.orangeLight.setColorFilter(resources.getColor(R.color.orange, applicationContext.theme))
-                                binding.greenLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
-                            }
-                            delay(1.toDuration(DurationUnit.SECONDS))
-                        }
-                    }
+                    viewModel.currentJob = GlobalScope.launch(Dispatchers.IO) { tlDayMode() }
                 }
                 TrafficLightMode.NIGHT_MODE -> {
                     viewModel.cancelJob()
                     turnOffLight()
-
-                    viewModel.currentJob = GlobalScope.launch(Dispatchers.IO) {
-                        while (true) {
-                            withContext(Dispatchers.Main) { binding.orangeLight.setColorFilter(resources.getColor(R.color.orange, applicationContext.theme)) }
-                            delay(1.toDuration(DurationUnit.SECONDS))
-
-                            withContext(Dispatchers.Main) { binding.orangeLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme)) }
-                            delay(1.toDuration(DurationUnit.SECONDS))
-                        }
-                    }
+                    viewModel.currentJob = GlobalScope.launch(Dispatchers.IO) { tlNightMode() }
                 }
                 else -> Log.e(tag, "trafficLightMode inside MainViewModel changed to null")
             }
@@ -109,5 +75,41 @@ class MainActivity : AppCompatActivity() {
         binding.redLight.setColorFilter(color)
         binding.orangeLight.setColorFilter(color)
         binding.greenLight.setColorFilter(color)
+    }
+
+    private suspend fun tlDayMode() {
+        while (true) {
+            withContext(Dispatchers.Main) {
+                binding.redLight.setColorFilter(resources.getColor(R.color.red, applicationContext.theme))
+                binding.orangeLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
+            }
+            delay(5.toDuration(DurationUnit.SECONDS))
+
+            withContext(Dispatchers.Main) { binding.orangeLight.setColorFilter(resources.getColor(R.color.orange, applicationContext.theme)) }
+            delay(2.toDuration(DurationUnit.SECONDS))
+
+            withContext(Dispatchers.Main) {
+                binding.redLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
+                binding.orangeLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
+                binding.greenLight.setColorFilter(resources.getColor(R.color.green, applicationContext.theme))
+            }
+            delay(5.toDuration(DurationUnit.SECONDS))
+
+            withContext(Dispatchers.Main) {
+                binding.orangeLight.setColorFilter(resources.getColor(R.color.orange, applicationContext.theme))
+                binding.greenLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
+            }
+            delay(1.toDuration(DurationUnit.SECONDS))
+        }
+    }
+
+    private suspend fun tlNightMode() {
+        while (true) {
+            withContext(Dispatchers.Main) { binding.orangeLight.setColorFilter(resources.getColor(R.color.orange, applicationContext.theme)) }
+            delay(1.toDuration(DurationUnit.SECONDS))
+
+            withContext(Dispatchers.Main) { binding.orangeLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme)) }
+            delay(1.toDuration(DurationUnit.SECONDS))
+        }
     }
 }
