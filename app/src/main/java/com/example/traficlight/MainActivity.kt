@@ -30,8 +30,7 @@ class MainActivity : AppCompatActivity() {
                 null -> Log.e(tag, "trafficLightMode inside MainViewModel is null")
                 TrafficLightMode.OFF -> {
                     viewModel.setTrafficLightDay()
-                    binding.pauseButton.isEnabled = true
-                    binding.playButton.isEnabled = true
+                    changeIsEnabledPlayPauseButton(true)
                 }
                 else -> viewModel.setTrafficLightOff()
             }
@@ -51,9 +50,7 @@ class MainActivity : AppCompatActivity() {
                 TrafficLightMode.OFF -> {
                     viewModel.cancelJob()
                     turnOffLight()
-
-                    binding.pauseButton.isEnabled = false
-                    binding.playButton.isEnabled = false
+                    changeIsEnabledPlayPauseButton(false)
                 }
                 TrafficLightMode.DAY_MODE -> {
                     viewModel.cancelJob()
@@ -75,6 +72,11 @@ class MainActivity : AppCompatActivity() {
         binding.redLight.setColorFilter(color)
         binding.orangeLight.setColorFilter(color)
         binding.greenLight.setColorFilter(color)
+    }
+
+    private fun changeIsEnabledPlayPauseButton(isEnabled: Boolean) {
+        binding.pauseButton.isEnabled = isEnabled
+        binding.playButton.isEnabled = isEnabled
     }
 
     private suspend fun tlDayMode() {
