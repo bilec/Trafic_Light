@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
                 binding.orangeLight.setColorFilter(resources.getColor(R.color.orange, applicationContext.theme))
                 binding.greenLight.setColorFilter(resources.getColor(R.color.grey, applicationContext.theme))
             }
-            delay(1.toDuration(DurationUnit.SECONDS))
+            delay(5.toDuration(DurationUnit.SECONDS))
         }
     }
 
