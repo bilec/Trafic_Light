@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // sets color of all lights to grey, so they appear to be turned off
     private fun turnOffLight() {
         val color = resources.getColor(R.color.grey, applicationContext.theme)
         binding.redLight.setColorFilter(color)
@@ -74,11 +75,13 @@ class MainActivity : AppCompatActivity() {
         binding.greenLight.setColorFilter(color)
     }
 
+    // changes isEnabled state of play and pause button
     private fun changeIsEnabledPlayPauseButton(isEnabled: Boolean) {
         binding.pauseButton.isEnabled = isEnabled
         binding.playButton.isEnabled = isEnabled
     }
 
+    // traffic light day mode operation
     private suspend fun tlDayMode() {
         while (true) {
             withContext(Dispatchers.Main) {
@@ -105,6 +108,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // traffic light night mode operation
     private suspend fun tlNightMode() {
         while (true) {
             withContext(Dispatchers.Main) { binding.orangeLight.setColorFilter(resources.getColor(R.color.orange, applicationContext.theme)) }
